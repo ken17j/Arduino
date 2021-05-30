@@ -3,7 +3,9 @@
    50k < ADC_freq < 200k for the best conversion when using 10 bits.
 */
 
+
 void setup() {
+
   Serial.begin(9600);
 
   // ADC A0 - A5
@@ -12,7 +14,9 @@ void setup() {
   ADCSRA = 1 << ADEN; // ADC enable
   ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // prescaler = 128: 125 kHz
   Serial.println(ADCSRA, BIN);
+
 }
+
 
 void loop() {
 

@@ -10,6 +10,7 @@
    DDR 0, PORT 1: OUTPUT HIGH
 */
 
+
 void setup() {
 
   // Serial communication

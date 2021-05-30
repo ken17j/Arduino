@@ -7,6 +7,7 @@
    D3, D11: using timer2
 */
 
+
 void setup() {
 
   Serial.begin(9600);
@@ -71,8 +72,9 @@ void setup() {
 
 }
 
+
 void loop() {
-  // put your main code here, to run repeatedly:
+
   while (true) {
     // nop
   }
