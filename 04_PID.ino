@@ -9,11 +9,15 @@
    PWM output -> DAC -> ADC input
    anarogWrite() -> LPF -> anarogRead()
    fc = 100 Hz
+   R1 = 16 kohm
+   C1 = 0.1 uF
+   R2 = 16 kohm
+   C2 = 0.1 uF
 */
 
-#define Kp 0.5 // proportional 
-#define Ki 0.3 // integral
-#define Kd 0.05 // differential
+#define Kp 5.0 // proportional 
+#define Ki 6.0 // integral
+#define Kd 0.0 // differential
 
 #define INPUT_PIN 0 // analog input
 #define OUTPUT_PIN 6 // analog(PWM) output
@@ -35,7 +39,7 @@ void loop() {
   unsigned long t; // current times
   float u; // control values
 
-  val_tgt = 4.0;
+  val_tgt = 4.0; // the target is 4.0 V
   val = 0;
   t = 0;
   u = 0;
@@ -49,7 +53,7 @@ void loop() {
     // control an unit using "u"
     ctrl(u);
 
-    delay(500); // please delete this
+    delay(100); // please delete this
   }
 
 }
@@ -110,19 +114,19 @@ float PID(float r, float y, unsigned long t) {
   u = Kp * e + Ki * e_i + Kd * e_d;
 
   // show datas
-  int buf[] = {y,
-               Kp * e,
-               Ki * e_i,
-               Kd * e_d,
-               u
-              };
+  float buf[] = {y,
+                 Kp * e,
+                 Ki * e_i,
+                 Kd * e_d,
+                 u
+                };
   for (int i = 0; i < 5; i++) {
-    Serial.print(buf[i]);
+    Serial.print(buf[i], 2);
     Serial.print("\t");
   }
   Serial.println("");
 
-  //Serial.println(val_cur);
+  //Serial.println(y);
 
   return u;
 
